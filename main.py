@@ -12,7 +12,9 @@ def execute_shell_commands(shell_cmd: str) -> str:
     Returns:
         A string representing the standard output of the executed shell command.
     """
+    print("Running shell command:", shell_cmd)
     p = subprocess.run(shell_cmd, shell=True, capture_output=True, encoding="utf-8")
+    print("Shell command result:", p.stdout)
     return p.stdout
 
 
