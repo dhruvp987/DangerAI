@@ -38,15 +38,15 @@ while True:
         contents=contents,
         config=config,
     )
-    func_call_part = response.function_calls[0]
+    func_call = response.candidates[0].content.parts[0].function_call
     if func_call:
-        result = execute_shell_commands(**func_call_part)
+        result = execute_shell_commands(**func_call.args)
         func_resp_part = types.Part.from_function_response(
-            name=func_call_part.name,
+            name=func_call.name,
             response={"result": result}
         )
         contents.append(response.candidates[0].content)
-        contents.append(types.Content(role="tool", parts=[func_resp_part]))
+        contents.append(types.Content(role="user", parts=[func_resp_part]))
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=contents,
