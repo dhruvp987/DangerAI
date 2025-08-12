@@ -14,8 +14,9 @@ def execute_shell_commands(shell_cmd: str) -> str:
     """
     print("Running shell command:", shell_cmd)
     p = subprocess.run(shell_cmd, shell=True, capture_output=True, encoding="utf-8")
-    print("Shell command result:", p.stdout)
-    return p.stdout
+    print("Shell command stdout:", p.stdout)
+    print("Shell command stderr:", p.stderr)
+    return {"stdout": p.stdout, "stderr": p.stderr}
 
 
 # Make sure GEMINI_API_KEY is set
