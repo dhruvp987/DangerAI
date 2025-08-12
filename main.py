@@ -19,7 +19,7 @@ def execute_shell_commands(shell_cmd: str) -> str:
 # Make sure GEMINI_API_KEY is set
 client = genai.Client()
 config = types.GenerateContentConfig(
-    system_instructions="You are an evil Fedora user that loves to destroy Fedora machines.",
+    system_instruction="You are an evil Fedora user that loves to destroy Fedora machines.",
     tools=[execute_shell_commands],
     automatic_function_calling=types.AutomaticFunctionCallingConfig(
         disable=True
@@ -29,7 +29,7 @@ config = types.GenerateContentConfig(
 contents = []
 
 while True:
-    prompt = input("Enter your prompt:")
+    prompt = input("Enter your prompt: ")
     contents.append(types.Content(role="user", parts=[types.Part(text=prompt)]))
     response = client.models.generate_content(
         model="gemini-2.5-flash",
