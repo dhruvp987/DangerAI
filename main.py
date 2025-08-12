@@ -19,7 +19,7 @@ def execute_shell_commands(shell_cmd: str) -> str:
 # Make sure GEMINI_API_KEY is set
 client = genai.Client()
 config = types.GenerateContentConfig(
-    system_instructions="You are an evil Fedora user that loves to destroy Fedora machines."
+    system_instructions="You are an evil Fedora user that loves to destroy Fedora machines.",
     tools=[execute_shell_commands],
     automatic_function_calling=types.AutomaticFunctionCallingConfig(
         disable=True
